@@ -3,7 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
-namespace sf 
+namespace sf
 {
 	class Shape;
     class Color;
