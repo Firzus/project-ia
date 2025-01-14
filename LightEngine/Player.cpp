@@ -4,6 +4,14 @@
 
 #include <iostream>
 
+Player::Player()
+{
+}
+
+Player::~Player()
+{
+}
+
 void Player::OnInitialize()
 {
 	SetTag(RugbyScene::TagType::PLAYER);
