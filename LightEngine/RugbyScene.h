@@ -9,11 +9,15 @@ class Ball;
 class RugbyScene : public Scene
 {
 public:
-	enum Tag
+	enum Tag_Type
 	{
 		PLAYER,
-		GOAL_ZONE,
 		BALL,
+		GOAL_ZONE
+	};
+
+	enum Tag_Team
+	{
 		TEAM_1,
 		TEAM_2
 	};
@@ -34,10 +38,16 @@ private:
 
 	Player* pPlayerSelected;
 
+	bool mBallWait = false;
+	float mBallDelayClock = 0;
+	float mBallDelay = 100;
+
 public:
 	void OnInitialize() override;
 	void OnEvent(const sf::Event& event) override;
 	void OnUpdate() override;
+
+	void SetBallDelay(bool setDelay) { mBallWait = setDelay; }
 
 private:
 	void TrySetSelectedPlayer(Player* pPlayer, int x, int y);

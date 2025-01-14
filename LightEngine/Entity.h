@@ -27,6 +27,8 @@ protected:
     float mSpeed = 0.f;
     bool mToDestroy = false;
     int mTag = -1;
+	int mTagTeam = -1;
+	bool mHasBall = false;
 	bool mRigidBody = false;
 
 public:
@@ -36,6 +38,8 @@ public:
 	void SetDirection(float x, float y, float speed = -1.f);
 	void SetSpeed(float speed) { mSpeed = speed; }
 	void SetTag(int tag) { mTag = tag; }
+	void SetTagTeam(int tagTeam) { mTagTeam = tagTeam; }
+	void SetHasBall(bool hasBall) { mHasBall = hasBall; }
 	float GetRadius() const { return mShape.getRadius(); }
 	void SetRigidBody(bool isRigitBody) { mRigidBody = isRigitBody; }
 	bool IsRigidBody() const { return mRigidBody; }
@@ -44,6 +48,7 @@ public:
 	sf::Shape* GetShape() { return &mShape; }
 
 	bool IsTag(int tag) const { return mTag == tag; }
+	bool IsTagTeam(int tagTeam) const { return mTagTeam == tagTeam; }
     bool IsColliding(Entity* other) const;
 	bool IsInside(float x, float y) const;
 

@@ -13,10 +13,12 @@ void RugbyScene::OnInitialize()
 	pPlayer1 = CreateEntity<Player>(30, sf::Color::Magenta);
 	pPlayer1->SetPosition(260, 330);
 	pPlayer1->SetRigidBody(true);
+	pPlayer1->SetTagTeam(TEAM_1);
 
 	pPlayer2 = CreateEntity<Player>(30, sf::Color::Red);
 	pPlayer2->SetPosition(960, 330);
 	pPlayer2->SetRigidBody(true);
+	pPlayer2->SetTagTeam(TEAM_2);
 
 	pPlayerSelected = nullptr;
 }
@@ -50,6 +52,20 @@ void RugbyScene::OnUpdate()
 	{
 		sf::Vector2f position = pPlayerSelected->GetPosition();
 		Debug::DrawCircle(position.x, position.y, 10, sf::Color::White);
+	}
+
+	if (!pBall->GetCanBeTaken())
+	{
+		if (mBallDelayClock < mBallDelay)
+		{
+			mBallDelayClock++;
+		}
+		else
+		{
+			mBallWait = false;
+			mBallDelayClock = 0;
+			pBall->SetCanBeTaken(true);
+		}
 	}
 }
 
