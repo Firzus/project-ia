@@ -37,6 +37,15 @@
     <ClCompile Include="RugbyScene.cpp">
       <Filter>IA</Filter>
     </ClCompile>
+    <ClCompile Include="GoalZone.cpp">
+      <Filter>IA</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>IA</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>IA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -61,6 +70,15 @@
       <Filter>Sample</Filter>
     </ClInclude>
     <ClInclude Include="RugbyScene.h">
+      <Filter>IA</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalZone.h">
+      <Filter>IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>IA</Filter>
     </ClInclude>
   </ItemGroup>
