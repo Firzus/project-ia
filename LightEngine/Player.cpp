@@ -6,7 +6,7 @@
 
 void Player::OnInitialize()
 {
-	SetTag(RugbyScene::Tag::PLAYER);
+	SetTag(RugbyScene::TagType::PLAYER);
 }
 
 void Player::OnCollision(Entity* other)

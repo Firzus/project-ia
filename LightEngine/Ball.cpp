@@ -6,14 +6,14 @@
 
 void Ball::OnInitialize()
 {
-	SetTag(RugbyScene::Tag::BALL);
+	SetTag(RugbyScene::TagType::BALL);
 }
 
 void Ball::OnCollision(Entity* pCollidedWith)
 {
 	std::cout << "Ball::OnCollision" << std::endl;
 
-	if (pCollidedWith->IsTag(RugbyScene::Tag::GOAL_ZONE))
+	if (pCollidedWith->IsTag(RugbyScene::TagType::GOAL_ZONE))
 	{
 		//GetScene<RugbyScene>()->OnDestroyZombie(mLane);
 
