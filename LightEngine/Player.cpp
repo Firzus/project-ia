@@ -14,7 +14,7 @@ Player::~Player()
 
 void Player::OnInitialize()
 {
-	SetTag(RugbyScene::Tag_Type::PLAYER);
+	SetTag(RugbyScene::TagType::PLAYER);
 }
 
 void Player::OnCollision(Entity* other)
@@ -31,11 +31,11 @@ void Player::OnUpdate()
 {
 	if (mHasBall)
 	{
-		if (IsTagTeam(RugbyScene::Tag_Team::TEAM_1))
+		if (IsTagTeam(RugbyScene::TagTeam::TEAM_1))
 		{
 			mBall->SetPosition(GetPosition().x + GetRadius() + 15, GetPosition().y);
 		}
-		else if (IsTagTeam(RugbyScene::Tag_Team::TEAM_2))
+		else if (IsTagTeam(RugbyScene::TagTeam::TEAM_2))
 		{
 			mBall->SetPosition(GetPosition().x - GetRadius() - 15, GetPosition().y);
 		}

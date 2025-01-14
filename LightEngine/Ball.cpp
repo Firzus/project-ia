@@ -6,14 +6,14 @@
 
 void Ball::OnInitialize()
 {
-	SetTag(RugbyScene::Tag_Type::BALL);
+	SetTag(RugbyScene::TagType::BALL);
 }
 
 void Ball::OnCollision(Entity* pCollidedWith)
 {
 	std::cout << "Ball::OnCollision" << std::endl;
 
-	if (pCollidedWith->IsTag(RugbyScene::Tag_Type::PLAYER))
+	if (pCollidedWith->IsTag(RugbyScene::TagType::PLAYER))
 	{
 		if (mCanBeTaken)
 		{

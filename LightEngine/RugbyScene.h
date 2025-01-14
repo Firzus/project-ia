@@ -9,14 +9,14 @@ class Ball;
 class RugbyScene : public Scene
 {
 public:
-	enum Tag_Type
+	enum TagType
 	{
 		PLAYER,
 		BALL,
 		GOAL_ZONE
 	};
 
-	enum Tag_Team
+	enum TagTeam
 	{
 		TEAM_1,
 		TEAM_2
