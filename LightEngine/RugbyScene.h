@@ -34,11 +34,11 @@ private:
 
 	Player* pPlayerSelected;
 
-private:
-	void TrySetSelectedPlayer(Player* pPlayer, int x, int y);
-
 public:
 	void OnInitialize() override;
 	void OnEvent(const sf::Event& event) override;
 	void OnUpdate() override;
+
+private:
+	void TrySetSelectedPlayer(Player* pPlayer, int x, int y);
 };
