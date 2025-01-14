@@ -29,7 +29,7 @@ void Ball::OnCollision(Entity* pCollidedWith)
 		}
 	}
 
-	if (pCollidedWith->IsTag(RugbyScene::Tag_Type::GOAL_ZONE))
+	if (pCollidedWith->IsTag(RugbyScene::TagType::GOAL_ZONE))
 	{
 		//GetScene<RugbyScene>()->OnDestroyZombie(mLane);
 

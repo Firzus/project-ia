@@ -4,14 +4,6 @@
 
 #include <iostream>
 
-Player::Player()
-{
-}
-
-Player::~Player()
-{
-}
-
 void Player::OnInitialize()
 {
 	SetTag(RugbyScene::TagType::PLAYER);
@@ -21,7 +13,7 @@ void Player::OnCollision(Entity* other)
 {
 	std::cout << "Player::OnCollision" << std::endl;
 
-	if (other->IsTag(RugbyScene::Tag_Type::BALL))
+	if (other->IsTag(RugbyScene::TagType::BALL))
 	{
 		mBall = other;
 	}
