@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Ball.h"
 #include "Debug.h"
+#include <iostream>
 
 void RugbyScene::OnInitialize()
 {
@@ -85,13 +86,15 @@ void RugbyScene::OnUpdate()
 			mTeam1Points++;
 		}
 
-		pBall->Respawn();
-		pBall->SetPosition(pBall->GetInitialPosition().x, pBall->GetInitialPosition().y);
+		// Reset ball and players
+		NewSleeve();
+	}
 
-		for (int i = 0; i < mPlayers.size(); i++)
-		{
-			mPlayers[i]->SetPosition(mPlayers[i]->GetInitialPosition().x, mPlayers[i]->GetInitialPosition().y);
-		}
+	if (mTeam1Points == 3 || mTeam2Points == 3)
+	{
+		std::cout << "Team " << (mTeam1Points == 3 ? "1" : "2") << " wins!" << std::endl;
+
+		NewGame();
 	}
 }
 
@@ -113,4 +116,23 @@ void RugbyScene::TrySetSelectedPlayer(Player* pPlayer, int x, int y)
 	}
 
 	pPlayerSelected = pPlayer;
+}
+
+void RugbyScene::NewSleeve()
+{
+	pBall->Respawn();
+	pBall->SetPosition(pBall->GetInitialPosition().x, pBall->GetInitialPosition().y);
+
+	for (int i = 0; i < mPlayers.size(); i++)
+	{
+		mPlayers[i]->SetPosition(mPlayers[i]->GetInitialPosition().x, mPlayers[i]->GetInitialPosition().y);
+	}
+}
+
+void RugbyScene::NewGame()
+{
+	NewSleeve();
+
+	mTeam1Points = 0;
+	mTeam2Points = 0;
 }

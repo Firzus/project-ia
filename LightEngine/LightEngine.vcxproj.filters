@@ -10,6 +10,9 @@
     <Filter Include="IA">
       <UniqueIdentifier>{88d826f3-b40f-40dc-9356-68266039bd4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\StateMachine">
+      <UniqueIdentifier>{59e15925-eef4-4cb4-95d0-3dd2b6eefbe2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp">
@@ -37,15 +40,14 @@
     <ClCompile Include="RugbyScene.cpp">
       <Filter>IA</Filter>
     </ClCompile>
-    <ClCompile Include="GoalZone.cpp">
-      <Filter>IA</Filter>
-    </ClCompile>
     <ClCompile Include="Ball.cpp">
       <Filter>IA</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>IA</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerAction.cpp" />
+    <ClCompile Include="PlayerCondition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -72,14 +74,25 @@
     <ClInclude Include="RugbyScene.h">
       <Filter>IA</Filter>
     </ClInclude>
-    <ClInclude Include="GoalZone.h">
-      <Filter>IA</Filter>
-    </ClInclude>
     <ClInclude Include="Ball.h">
       <Filter>IA</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>IA</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAction.h" />
+    <ClInclude Include="PlayerCondition.h" />
+    <ClInclude Include="Action.h">
+      <Filter>Engine\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition.h">
+      <Filter>Engine\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Engine\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>Engine\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +104,18 @@
     </None>
     <None Include="Entity.inl">
       <Filter>Engine</Filter>
+    </None>
+    <None Include="Action.inl">
+      <Filter>Engine\StateMachine</Filter>
+    </None>
+    <None Include="Condition.inl">
+      <Filter>Engine\StateMachine</Filter>
+    </None>
+    <None Include="StateMachine.inl">
+      <Filter>Engine\StateMachine</Filter>
+    </None>
+    <None Include="Transition.inl">
+      <Filter>Engine\StateMachine</Filter>
     </None>
   </ItemGroup>
 </Project>

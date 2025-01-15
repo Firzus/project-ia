@@ -36,14 +36,20 @@ private:
 	int mTeam1Points = 0;
 	int mTeam2Points = 0;
 
+	bool isMatchPlaying = false;
+
 public:
 	void OnInitialize() override;
 	void OnEvent(const sf::Event& event) override;
 	void OnUpdate() override;
 	Player* CreatePlayer(float radius, const sf::Color& color, float x, float y, float ratioX, float ratioY, int tagTeam);
 
+	bool IsMatchPlaying() const { return isMatchPlaying; }
+
 	void SetBallDelay(bool setDelay) { mBallWait = setDelay; }
 
 private:
 	void TrySetSelectedPlayer(Player* pPlayer, int x, int y);
+	void NewSleeve();
+	void NewGame();
 };
