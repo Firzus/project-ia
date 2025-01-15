@@ -41,6 +41,7 @@ public:
 	void SetDirection(float x, float y, float speed = -1.f);
 	void SetSpeed(float speed) { mSpeed = speed; }
 	void SetTag(int tag) { mTag = tag; }
+	int GetTagTeam() { return mTagTeam; }
 	void SetTagTeam(int tagTeam) { mTagTeam = tagTeam; }
 	void SetHasBall(bool hasBall) { mHasBall = hasBall; }
 	float GetRadius() const { return mShape.getRadius(); }

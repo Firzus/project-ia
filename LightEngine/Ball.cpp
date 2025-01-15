@@ -30,9 +30,9 @@ void Ball::OnCollision(Entity* pCollidedWith)
 	}
 }
 
-void Ball::Respawn()
+void Ball::ResetHoldable(bool canBeTaken)
 {
-	mCanBeTaken = true;
+	mCanBeTaken = canBeTaken;
 
 	if (mPlayer != NULL)
 	{

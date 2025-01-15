@@ -44,6 +44,11 @@ void RugbyScene::OnEvent(const sf::Event& event)
 			pPlayerSelected->GoToPosition(event.mouseButton.x, event.mouseButton.y, 100.0f);
 		}
 	}
+
+	if (event.key.code == sf::Keyboard::Space)
+	{
+		MakeAPass();
+	}
 }
 
 void RugbyScene::OnUpdate()
@@ -60,16 +65,33 @@ void RugbyScene::OnUpdate()
 		Debug::DrawCircle(position.x, position.y, 10, sf::Color::White);
 	}
 
+	// Delay to make ball untouchable when a player just took it
 	if (!pBall->GetCanBeTaken())
 	{
-		if (mBallDelayClock < mBallDelay)
+		if (mBallHoldDelayClock < mBallHoldDelay)
 		{
-			mBallDelayClock++;
+			mBallHoldDelayClock++;
 		}
 		else
 		{
 			mBallWait = false;
-			mBallDelayClock = 0;
+			mBallHoldDelayClock = 0;
+			pBall->SetCanBeTaken(true);
+		}
+	}
+
+	// Delay to make ball untouchable while passing it to avoid collision problems
+	if (mBallIsBeingPassed)
+	{
+		if (mBallPassDelayClock < mBallPassDelay)
+		{
+			mBallPassDelayClock++;
+		}
+		else
+		{
+			mBallIsBeingPassed = false;
+			mBallPassDelayClock = 0;
+			pBall->SetRigidBody(true);
 			pBall->SetCanBeTaken(true);
 		}
 	}
@@ -85,7 +107,7 @@ void RugbyScene::OnUpdate()
 			mTeam1Points++;
 		}
 
-		pBall->Respawn();
+		pBall->ResetHoldable(true);
 		pBall->SetPosition(pBall->GetInitialPosition().x, pBall->GetInitialPosition().y);
 
 		for (int i = 0; i < mPlayers.size(); i++)
@@ -103,6 +125,43 @@ Player* RugbyScene::CreatePlayer(float radius, const sf::Color& color, float x, 
 	player->SetTagTeam(tagTeam);
 
 	return player;
+}
+
+void RugbyScene::MakeAPass()
+{
+	Player* playerHoldingBall = dynamic_cast<Player*>(pBall->GetPlayerHoldingBall());
+
+	if (playerHoldingBall != NULL)
+	{
+		Player* nearestTeammate = NULL;
+		float shortestDistance = 10000000;
+
+		for (int i = 0; i < mPlayers.size(); i++)
+		{
+			if (mPlayers[i]->IsTagTeam(playerHoldingBall->GetTagTeam()))
+			{
+				if (mPlayers[i] != playerHoldingBall)
+				{
+					float distance = std::pow(playerHoldingBall->GetPosition().x - mPlayers[i]->GetPosition().x, 2) +
+						std::pow(playerHoldingBall->GetPosition().y - mPlayers[i]->GetPosition().y, 2);
+
+					if (distance < shortestDistance)
+					{
+						nearestTeammate = mPlayers[i];
+						shortestDistance = distance;
+					}
+				}
+			}
+		}
+
+		if (nearestTeammate != NULL)
+		{
+			pBall->ResetHoldable(false);
+			pBall->SetRigidBody(false);
+			pBall->GoToPosition(nearestTeammate->GetPosition().x, nearestTeammate->GetPosition().y, 200.0f);
+			mBallIsBeingPassed = true;
+		}
+	}
 }
 
 void RugbyScene::TrySetSelectedPlayer(Player* pPlayer, int x, int y)
