@@ -10,15 +10,19 @@ void RugbyScene::OnInitialize()
 	pBall->SetPosition(625, 345);
 	pBall->SetRigidBody(true);
 
-	pPlayer1 = CreateEntity<Player>(30, sf::Color::Magenta);
-	pPlayer1->SetPosition(260, 330);
-	pPlayer1->SetRigidBody(true);
-	pPlayer1->SetTagTeam(TEAM_1);
+	// Team 1 players
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Magenta, 200, 135, 1, 1, TEAM_1));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Magenta, 290, 215, 1, 1, TEAM_1));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Magenta, 440, 375, 1, 1, TEAM_1));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Magenta, 290, 535, 1, 1, TEAM_1));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Magenta, 200, 615, 1, 1, TEAM_1));
 
-	pPlayer2 = CreateEntity<Player>(30, sf::Color::Red);
-	pPlayer2->SetPosition(960, 330);
-	pPlayer2->SetRigidBody(true);
-	pPlayer2->SetTagTeam(TEAM_2);
+	// Team 2 players
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Red, 1120, 135, 1, 1, TEAM_2));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Red, 1020, 215, 1, 1, TEAM_2));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Red, 870, 375, 1, 1, TEAM_2));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Red, 1020, 535, 1, 1, TEAM_2));
+	mPlayers.push_back(CreatePlayer(30, sf::Color::Red, 1120, 615, 1, 1, TEAM_2));
 
 	pPlayerSelected = nullptr;
 }
@@ -27,8 +31,10 @@ void RugbyScene::OnEvent(const sf::Event& event)
 {
 	if (event.mouseButton.button == sf::Mouse::Button::Left)
 	{
-		TrySetSelectedPlayer(pPlayer1, event.mouseButton.x, event.mouseButton.y);
-		TrySetSelectedPlayer(pPlayer2, event.mouseButton.x, event.mouseButton.y);
+		for (int i = 0; i < mPlayers.size(); i++)
+		{
+			TrySetSelectedPlayer(mPlayers[i], event.mouseButton.x, event.mouseButton.y);
+		}
 	}
 
 	if (event.mouseButton.button == sf::Mouse::Button::Right)
@@ -67,6 +73,36 @@ void RugbyScene::OnUpdate()
 			pBall->SetCanBeTaken(true);
 		}
 	}
+
+	if (pBall->GetPosition().x < 100 || pBall->GetPosition().x > 1180)
+	{
+		if (pBall->GetPosition().x < 100)
+		{
+			mTeam2Points++;
+		}
+		else if (pBall->GetPosition().x > 1180)
+		{
+			mTeam1Points++;
+		}
+
+		pBall->Respawn();
+		pBall->SetPosition(pBall->GetInitialPosition().x, pBall->GetInitialPosition().y);
+
+		for (int i = 0; i < mPlayers.size(); i++)
+		{
+			mPlayers[i]->SetPosition(mPlayers[i]->GetInitialPosition().x, mPlayers[i]->GetInitialPosition().y);
+		}
+	}
+}
+
+Player* RugbyScene::CreatePlayer(float radius, const sf::Color& color, float x, float y, float ratioX, float ratioY, int tagTeam)
+{
+	Player* player = CreateEntity<Player>(radius, color);
+	player->SetPosition(x, y, ratioX, ratioY);
+	player->SetRigidBody(true);
+	player->SetTagTeam(tagTeam);
+
+	return player;
 }
 
 void RugbyScene::TrySetSelectedPlayer(Player* pPlayer, int x, int y)

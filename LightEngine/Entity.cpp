@@ -78,6 +78,16 @@ void Entity::Destroy()
 
 void Entity::SetPosition(float x, float y, float ratioX, float ratioY)
 {
+	if (mInitalPosX == NULL)
+	{
+		mInitalPosX = x;
+	}
+
+	if (mInitalPosY == NULL)
+	{
+		mInitalPosY = y;
+	}
+
 	float size = mShape.getRadius() * 2;
 
 	x -= size * ratioX;

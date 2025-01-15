@@ -12,6 +12,7 @@ private:
 public:
 	void OnInitialize() override;
 	void OnCollision(Entity* other) override;
+	void Respawn();
 
 	bool GetCanBeTaken() { return mCanBeTaken; }
 	void SetCanBeTaken(bool canBeTaken) { mCanBeTaken = canBeTaken; }
