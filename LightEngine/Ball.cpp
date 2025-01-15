@@ -26,6 +26,7 @@ void Ball::OnCollision(Entity* pCollidedWith)
 
 			mPlayer = pCollidedWith;
 			mPlayer->SetHasBall(true);
+			ResetTarget();
 		}
 	}
 }

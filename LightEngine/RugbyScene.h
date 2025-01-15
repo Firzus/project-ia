@@ -35,7 +35,7 @@ private:
 
 	bool mBallIsBeingPassed = false;
 	float mBallPassDelayClock = 0;
-	float mBallPassDelay = 30;
+	float mBallPassDelay = 40;
 
 	int mTeam1Points = 0;
 	int mTeam2Points = 0;

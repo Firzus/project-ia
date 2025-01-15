@@ -108,10 +108,12 @@ void RugbyScene::OnUpdate()
 
 		pBall->ResetHoldable(true);
 		pBall->SetPosition(pBall->GetInitialPosition().x, pBall->GetInitialPosition().y);
+		pBall->ResetTarget();
 
 		for (int i = 0; i < mPlayers.size(); i++)
 		{
 			mPlayers[i]->SetPosition(mPlayers[i]->GetInitialPosition().x, mPlayers[i]->GetInitialPosition().y);
+			mPlayers[i]->ResetTarget();
 		}
 	}
 }
@@ -135,6 +137,7 @@ void RugbyScene::MakeAPass()
 		Player* nearestTeammate = NULL;
 		float shortestDistance = 10000000;
 
+		// Search for the nearest player of the same team of the player holding the ball (excluding himself)
 		for (int i = 0; i < mPlayers.size(); i++)
 		{
 			if (mPlayers[i]->IsTagTeam(playerHoldingBall->GetTagTeam()))
