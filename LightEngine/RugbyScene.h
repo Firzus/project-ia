@@ -30,8 +30,12 @@ private:
 	Player* pPlayerSelected;
 
 	bool mBallWait = false;
-	float mBallDelayClock = 0;
-	float mBallDelay = 100;
+	float mBallHoldDelayClock = 0;
+	float mBallHoldDelay = 100;
+
+	bool mBallIsBeingPassed = false;
+	float mBallPassDelayClock = 0;
+	float mBallPassDelay = 40;
 
 	int mTeam1Points = 0;
 	int mTeam2Points = 0;
@@ -43,6 +47,7 @@ public:
 	void OnEvent(const sf::Event& event) override;
 	void OnUpdate() override;
 	Player* CreatePlayer(float radius, const sf::Color& color, float x, float y, float ratioX, float ratioY, int tagTeam);
+	void MakeAPass();
 
 	bool IsMatchPlaying() const { return isMatchPlaying; }
 

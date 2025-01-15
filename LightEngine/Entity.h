@@ -41,11 +41,13 @@ public:
 	void SetDirection(float x, float y, float speed = -1.f);
 	void SetSpeed(float speed) { mSpeed = speed; }
 	void SetTag(int tag) { mTag = tag; }
+	int GetTagTeam() { return mTagTeam; }
 	void SetTagTeam(int tagTeam) { mTagTeam = tagTeam; }
 	void SetHasBall(bool hasBall) { mHasBall = hasBall; }
 	float GetRadius() const { return mShape.getRadius(); }
 	void SetRigidBody(bool isRigitBody) { mRigidBody = isRigitBody; }
 	bool IsRigidBody() const { return mRigidBody; }
+	void ResetTarget() { mTarget.isSet = false; mDirection = sf::Vector2f(0.f, 0.f); }
 
     sf::Vector2f GetPosition(float ratioX = 0.5f, float ratioY = 0.5f) const;
 	sf::Shape* GetShape() { return &mShape; }
