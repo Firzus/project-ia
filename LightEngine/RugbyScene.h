@@ -22,16 +22,8 @@ public:
 	};
 
 private:
-	Player* pPlayer1;
-	Player* pPlayer2;
-	Player* pPlayer3;
-	Player* pPlayer4;
-	Player* pPlayer5;
-	Player* pPlayer6;
-	Player* pPlayer7;
-	Player* pPlayer8;
-	Player* pPlayer9;
-	Player* pPlayer10;
+
+	std::vector<Player*> mPlayers;
 
 	Ball* pBall;
 
@@ -48,6 +40,7 @@ public:
 	void OnInitialize() override;
 	void OnEvent(const sf::Event& event) override;
 	void OnUpdate() override;
+	Player* CreatePlayer(float radius, const sf::Color& color, float x, float y, float ratioX, float ratioY, int tagTeam);
 
 	void SetBallDelay(bool setDelay) { mBallWait = setDelay; }
 
