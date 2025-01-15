@@ -24,6 +24,8 @@ protected:
     sf::CircleShape mShape;
     sf::Vector2f mDirection;
 	Target mTarget;
+	float mInitalPosX = NULL;
+	float mInitalPosY = NULL;
     float mSpeed = 0.f;
     bool mToDestroy = false;
     int mTag = -1;
@@ -34,6 +36,7 @@ protected:
 public:
 	bool GoToDirection(int x, int y, float speed = -1.f);
     bool GoToPosition(int x, int y, float speed = -1.f);
+	sf::Vector2f GetInitialPosition() { return {mInitalPosX, mInitalPosY}; }
     void SetPosition(float x, float y, float ratioX = 0.5f, float ratioY = 0.5f);
 	void SetDirection(float x, float y, float speed = -1.f);
 	void SetSpeed(float speed) { mSpeed = speed; }

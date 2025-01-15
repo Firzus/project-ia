@@ -12,8 +12,7 @@ public:
 	enum TagType
 	{
 		PLAYER,
-		BALL,
-		GOAL_ZONE
+		BALL
 	};
 
 	enum TagTeam
@@ -41,6 +40,9 @@ private:
 	bool mBallWait = false;
 	float mBallDelayClock = 0;
 	float mBallDelay = 100;
+
+	int mTeam1Points = 0;
+	int mTeam2Points = 0;
 
 public:
 	void OnInitialize() override;

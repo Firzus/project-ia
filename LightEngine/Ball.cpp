@@ -28,11 +28,16 @@ void Ball::OnCollision(Entity* pCollidedWith)
 			mPlayer->SetHasBall(true);
 		}
 	}
+}
 
-	if (pCollidedWith->IsTag(RugbyScene::TagType::GOAL_ZONE))
+void Ball::Respawn()
+{
+	mCanBeTaken = true;
+
+	if (mPlayer != NULL)
 	{
-		//GetScene<RugbyScene>()->OnDestroyZombie(mLane);
-
-		Destroy();
+		mPlayer->SetHasBall(false);
 	}
+
+	mPlayer = NULL;
 }

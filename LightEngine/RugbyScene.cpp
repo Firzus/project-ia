@@ -67,6 +67,23 @@ void RugbyScene::OnUpdate()
 			pBall->SetCanBeTaken(true);
 		}
 	}
+
+	if (pBall->GetPosition().x < 100 || pBall->GetPosition().x > 1180)
+	{
+		if (pBall->GetPosition().x < 100)
+		{
+			mTeam2Points++;
+		}
+		else if (pBall->GetPosition().x > 1180)
+		{
+			mTeam1Points++;
+		}
+
+		pBall->Respawn();
+		pBall->SetPosition(pBall->GetInitialPosition().x, pBall->GetInitialPosition().y);
+		pPlayer1->SetPosition(pPlayer1->GetInitialPosition().x, pPlayer1->GetInitialPosition().y);
+		pPlayer2->SetPosition(pPlayer2->GetInitialPosition().x, pPlayer2->GetInitialPosition().y);
+	}
 }
 
 void RugbyScene::TrySetSelectedPlayer(Player* pPlayer, int x, int y)
