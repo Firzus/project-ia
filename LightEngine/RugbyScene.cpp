@@ -8,7 +8,7 @@ void RugbyScene::OnInitialize()
 {
 	pBall = CreateEntity<Ball>(15, sf::Color::Green);
 	pBall->SetPosition(625, 345);
-	pBall->SetRigidBody(true);
+	pBall->SetRigidBody(false);
 
 	// Team 1 players
 	mPlayers.push_back(CreatePlayer(30, sf::Color::Magenta, 200, 135, 1, 1, TEAM_1));
@@ -91,7 +91,6 @@ void RugbyScene::OnUpdate()
 		{
 			mBallIsBeingPassed = false;
 			mBallPassDelayClock = 0;
-			pBall->SetRigidBody(true);
 			pBall->SetCanBeTaken(true);
 		}
 	}
@@ -157,7 +156,6 @@ void RugbyScene::MakeAPass()
 		if (nearestTeammate != NULL)
 		{
 			pBall->ResetHoldable(false);
-			pBall->SetRigidBody(false);
 			pBall->GoToPosition(nearestTeammate->GetPosition().x, nearestTeammate->GetPosition().y, 200.0f);
 			mBallIsBeingPassed = true;
 		}
