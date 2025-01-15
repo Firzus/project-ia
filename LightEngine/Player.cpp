@@ -2,15 +2,11 @@
 
 #include "RugbyScene.h"
 
+#include "StateMachine.h"
+#include "PlayerAction.h"
+#include "PlayerCondition.h"
+
 #include <iostream>
-
-Player::Player()
-{
-}
-
-Player::~Player()
-{
-}
 
 void Player::OnInitialize()
 {
