@@ -4,12 +4,13 @@
 
 class Player : public Entity
 {
-public:
-	void OnCollision(Entity* other) override;
+private:
+	Entity* mBall;
 
 protected:
 	void OnUpdate() override;
 	void OnInitialize() override;
+	void OnCollision(Entity* other) override;
 
 	friend class PlayerAction_;
 	friend class PlantAction_Reloading;
