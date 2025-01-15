@@ -37,3 +37,35 @@ void Player::OnUpdate()
 		}
 	}
 }
+
+void Player::MakeAPass()
+{
+	Player* nearestTeammate = NULL;
+	float shortestDistance = 10000000;
+
+	RugbyScene* rugbyScene = GetScene<RugbyScene>();
+
+	// Search for the nearest player of the same team of the player holding the ball (excluding himself)
+	for (int i = 0; i < rugbyScene->GetPlayerList().size(); i++)
+	{
+		if (rugbyScene->GetPlayerList()[i]->IsTagTeam(GetTagTeam()))
+		{
+			if (rugbyScene->GetPlayerList()[i] != this)
+			{
+				float distance = std::pow(GetPosition().x - rugbyScene->GetPlayerList()[i]->GetPosition().x, 2) +
+					std::pow(GetPosition().y - rugbyScene->GetPlayerList()[i]->GetPosition().y, 2);
+
+				if (distance < shortestDistance)
+				{
+					nearestTeammate = rugbyScene->GetPlayerList()[i];
+					shortestDistance = distance;
+				}
+			}
+		}
+	}
+
+	if (nearestTeammate != NULL)
+	{
+		rugbyScene->PassBall(nearestTeammate->GetPosition().x, nearestTeammate->GetPosition().y);
+	}
+}

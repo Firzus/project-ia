@@ -48,7 +48,12 @@ void RugbyScene::OnEvent(const sf::Event& event)
 
 	if (event.key.code == sf::Keyboard::Space)
 	{
-		MakeAPass();
+		Player* playerHoldingBall = dynamic_cast<Player*>(pBall->GetPlayerHoldingBall());
+
+		if (playerHoldingBall != NULL)
+		{
+			playerHoldingBall->MakeAPass();
+		}
 	}
 }
 
@@ -129,41 +134,11 @@ Player* RugbyScene::CreatePlayer(float radius, const sf::Color& color, float x, 
 	return player;
 }
 
-void RugbyScene::MakeAPass()
+void RugbyScene::PassBall(float x, float y)
 {
-	Player* playerHoldingBall = dynamic_cast<Player*>(pBall->GetPlayerHoldingBall());
-
-	if (playerHoldingBall != NULL)
-	{
-		Player* nearestTeammate = NULL;
-		float shortestDistance = 10000000;
-
-		// Search for the nearest player of the same team of the player holding the ball (excluding himself)
-		for (int i = 0; i < mPlayers.size(); i++)
-		{
-			if (mPlayers[i]->IsTagTeam(playerHoldingBall->GetTagTeam()))
-			{
-				if (mPlayers[i] != playerHoldingBall)
-				{
-					float distance = std::pow(playerHoldingBall->GetPosition().x - mPlayers[i]->GetPosition().x, 2) +
-						std::pow(playerHoldingBall->GetPosition().y - mPlayers[i]->GetPosition().y, 2);
-
-					if (distance < shortestDistance)
-					{
-						nearestTeammate = mPlayers[i];
-						shortestDistance = distance;
-					}
-				}
-			}
-		}
-
-		if (nearestTeammate != NULL)
-		{
-			pBall->ResetHoldable(false);
-			pBall->GoToPosition(nearestTeammate->GetPosition().x, nearestTeammate->GetPosition().y, 200.0f);
-			mBallIsBeingPassed = true;
-		}
-	}
+	pBall->ResetHoldable(false);
+	pBall->GoToPosition(x, y, 200.0f);
+	mBallIsBeingPassed = true;
 }
 
 void RugbyScene::TrySetSelectedPlayer(Player* pPlayer, int x, int y)
@@ -179,12 +154,12 @@ void RugbyScene::TrySetSelectedPlayer(Player* pPlayer, int x, int y)
 void RugbyScene::NewSleeve()
 {
 	pBall->ResetHoldable(true);
-	pBall->Respawn();
 	pBall->SetPosition(pBall->GetInitialPosition().x, pBall->GetInitialPosition().y);
 
 	for (int i = 0; i < mPlayers.size(); i++)
 	{
-		mPlayers[i]->SetPosition(mPlayers[i]->GetInitialPosition().x, mPlayers[i]->GetInitialPosition().y);
+		mPlayers[i]->SetPosition(mPlayers[i]->GetInitialPosition().x, mPlayers[i]->GetInitialPosition().y, 
+			mPlayers[i]->GetInitialRatio().x, mPlayers[i]->GetInitialRatio().y);
 		mPlayers[i]->ResetTarget();
 	}
 }

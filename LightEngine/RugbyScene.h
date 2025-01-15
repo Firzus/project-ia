@@ -47,11 +47,13 @@ public:
 	void OnEvent(const sf::Event& event) override;
 	void OnUpdate() override;
 	Player* CreatePlayer(float radius, const sf::Color& color, float x, float y, float ratioX, float ratioY, int tagTeam);
-	void MakeAPass();
+	void PassBall(float x, float y);
 
 	bool IsMatchPlaying() const { return isMatchPlaying; }
 
 	void SetBallDelay(bool setDelay) { mBallWait = setDelay; }
+	std::vector<Player*> GetPlayerList() { return mPlayers; }
+	Ball* GetBall() { return pBall; }
 
 private:
 	void TrySetSelectedPlayer(Player* pPlayer, int x, int y);

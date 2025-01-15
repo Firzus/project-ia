@@ -7,6 +7,9 @@ class Player : public Entity
 private:
 	Entity* mBall;
 
+public:
+	void MakeAPass();
+
 protected:
 	void OnInitialize() override;
 	void OnCollision(Entity* other) override;
