@@ -39,6 +39,7 @@ private:
 
 	int mTeam1Points = 0;
 	int mTeam2Points = 0;
+	int mTeamWhoLostPoint = -1;
 
 	bool isMatchPlaying = false;
 

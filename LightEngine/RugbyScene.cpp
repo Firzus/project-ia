@@ -4,6 +4,7 @@
 #include "Ball.h"
 #include "Debug.h"
 #include <iostream>
+#include <random>
 
 void RugbyScene::OnInitialize()
 {
@@ -106,10 +107,12 @@ void RugbyScene::OnUpdate()
 		if (pBall->GetPosition().x < 100)
 		{
 			mTeam2Points++;
+			mTeamWhoLostPoint = TEAM_1;
 		}
 		else if (pBall->GetPosition().x > 1180)
 		{
 			mTeam1Points++;
+			mTeamWhoLostPoint = TEAM_2;
 		}
 
 		// Reset ball and players
@@ -161,6 +164,18 @@ void RugbyScene::NewSleeve()
 		mPlayers[i]->SetPosition(mPlayers[i]->GetInitialPosition().x, mPlayers[i]->GetInitialPosition().y, 
 			mPlayers[i]->GetInitialRatio().x, mPlayers[i]->GetInitialRatio().y);
 		mPlayers[i]->ResetTarget();
+	}
+
+	// Ball respawn randomly on a player of the team who lost the point
+	std::srand(static_cast<unsigned>(std::time(nullptr)));
+	int random_number = (std::rand() % 5);
+	if (mTeamWhoLostPoint == TEAM_1)
+	{
+		pBall->SetPosition(mPlayers[random_number]->GetInitialPosition().x, mPlayers[random_number]->GetInitialPosition().y);
+	}
+	else if (mTeamWhoLostPoint == TEAM_2)
+	{
+		pBall->SetPosition(mPlayers[random_number + 5]->GetInitialPosition().x, mPlayers[random_number + 5]->GetInitialPosition().y);
 	}
 }
 
