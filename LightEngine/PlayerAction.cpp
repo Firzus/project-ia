@@ -4,18 +4,6 @@
 #include "RugbyScene.h"
 #include "GameManager.h"
 
-void PlayerAction_Idle::OnStart(Player* pPlayer)
-{
-}
-
-void PlayerAction_Idle::OnUpdate(Player* pPlayer)
-{
-}
-
-void PlayerAction_Idle::OnEnd(Player* pPlayer)
-{
-}
-
 void PlayerAction_Rush::OnStart(Player* pPlayer)
 {
 }

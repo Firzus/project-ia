@@ -69,3 +69,22 @@ void Player::MakeAPass()
 		rugbyScene->PassBall(nearestTeammate->GetPosition().x, nearestTeammate->GetPosition().y);
 	}
 }
+
+const char* Player::GetStateName(State state) const
+{
+	switch (state)
+	{
+	case Player::Rush:
+		return "Rush";
+		break;
+	case Player::ScoreGoal:
+		return "ScoreGoal";
+		break;
+	case Player::Support:
+		return "Support";
+		break;
+	default:
+		return "Unknown";
+		break;
+	}
+}

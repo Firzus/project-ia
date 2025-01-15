@@ -2,20 +2,34 @@
 
 #include "Entity.h"
 
+template<typename T>
+class StateMachine;
+
 class Player : public Entity
 {
+	StateMachine<Player>* mpStateMachine;
+
+	enum State
+	{
+		Rush,
+		ScoreGoal,
+		Support,
+
+		Count
+	};
+
 private:
 	Entity* mBall;
 
 public:
 	void MakeAPass();
+	const char* GetStateName(State state) const;
 
 protected:
 	void OnInitialize() override;
 	void OnCollision(Entity* other) override;
 	void OnUpdate() override;
 
-	friend class PlayerAction_Idle;
 	friend class PlayerAction_Rush;
 	friend class PlayerAction_ScoreGoal;
 	friend class PlayerAction_Support;
